@@ -1,22 +1,14 @@
-package com.riteshmaagadh.whatsappgrouplinks.ui
+package com.riteshmaagadh.cms.ui
 
 import android.os.Bundle
-import android.util.Log
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
-import com.google.android.gms.ads.AdRequest
-import com.google.android.gms.ads.LoadAdError
-import com.google.android.gms.ads.MobileAds
-import com.google.android.gms.ads.OnUserEarnedRewardListener
-import com.google.android.gms.ads.rewarded.RewardItem
-import com.google.android.gms.ads.rewarded.RewardedAd
-import com.google.android.gms.ads.rewarded.RewardedAdLoadCallback
 import com.google.android.material.navigation.NavigationBarView
-import com.riteshmaagadh.whatsappgrouplinks.R
-import com.riteshmaagadh.whatsappgrouplinks.databinding.ActivityMainBinding
-import com.riteshmaagadh.whatsappgrouplinks.ui.addlink.AddLinkFragment
-import com.riteshmaagadh.whatsappgrouplinks.ui.categories.CategoriesFragment
-import com.riteshmaagadh.whatsappgrouplinks.ui.home.HomeFragment
+import com.riteshmaagadh.cms.R
+import com.riteshmaagadh.cms.databinding.ActivityMainBinding
+import com.riteshmaagadh.cms.ui.addlink.AddLinkFragment
+import com.riteshmaagadh.cms.ui.categories.CategoriesFragment
+import com.riteshmaagadh.cms.ui.home.HomeFragment
 
 
 class MainActivity : AppCompatActivity() {
@@ -39,9 +31,6 @@ class MainActivity : AppCompatActivity() {
             }
         })
 
-        MobileAds.initialize(this)
-        val adRequest = AdRequest.Builder().build()
-        binding.adView.loadAd(adRequest)
 
         binding.bottomNavigationView.setOnItemReselectedListener {
 

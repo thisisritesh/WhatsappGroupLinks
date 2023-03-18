@@ -1,4 +1,4 @@
-package com.riteshmaagadh.whatsappgrouplinks.ui.addlink
+package com.riteshmaagadh.cms.ui.addlink
 
 import android.app.Activity
 import android.content.Intent
@@ -21,11 +21,11 @@ import com.bumptech.glide.Glide
 import com.google.android.material.snackbar.Snackbar
 import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.storage.FirebaseStorage
-import com.riteshmaagadh.whatsappgrouplinks.R
-import com.riteshmaagadh.whatsappgrouplinks.data.models.Group
-import com.riteshmaagadh.whatsappgrouplinks.data.models.Index
-import com.riteshmaagadh.whatsappgrouplinks.databinding.FragmentAddLinkBinding
-import com.riteshmaagadh.whatsappgrouplinks.ui.Utils
+import com.riteshmaagadh.cms.R
+import com.riteshmaagadh.cms.data.models.Group
+import com.riteshmaagadh.cms.data.models.Index
+import com.riteshmaagadh.cms.databinding.FragmentAddLinkBinding
+import com.riteshmaagadh.cms.ui.Utils
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import java.io.ByteArrayOutputStream

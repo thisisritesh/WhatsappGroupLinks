@@ -1,4 +1,4 @@
-package com.riteshmaagadh.whatsappgrouplinks.ui
+package com.riteshmaagadh.cms.ui
 
 import android.content.Context
 import android.content.Intent
@@ -6,7 +6,7 @@ import android.content.pm.PackageManager
 import android.net.ConnectivityManager
 import android.net.Uri
 import android.widget.Toast
-import com.riteshmaagadh.whatsappgrouplinks.data.models.Category
+import com.riteshmaagadh.cms.data.models.Category
 
 object Utils {
 

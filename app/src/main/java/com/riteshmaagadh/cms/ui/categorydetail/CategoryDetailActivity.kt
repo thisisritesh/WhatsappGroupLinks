@@ -1,39 +1,27 @@
-package com.riteshmaagadh.whatsappgrouplinks.ui.home
+package com.riteshmaagadh.cms.ui.categorydetail
 
 import android.content.Intent
+import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.util.Log
-import android.view.LayoutInflater
 import android.view.View
-import android.view.ViewGroup
 import android.widget.AbsListView
-import android.widget.Toast
-import androidx.fragment.app.Fragment
 import androidx.lifecycle.lifecycleScope
-import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import com.google.android.gms.ads.*
-import com.google.android.gms.ads.rewarded.RewardItem
-import com.google.android.gms.ads.rewarded.RewardedAd
-import com.google.android.gms.ads.rewarded.RewardedAdLoadCallback
-import com.google.firebase.firestore.DocumentReference
 import com.google.firebase.firestore.DocumentSnapshot
 import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.firestore.Query
-import com.riteshmaagadh.whatsappgrouplinks.R
-import com.riteshmaagadh.whatsappgrouplinks.data.adapters.GroupsAdapter
-import com.riteshmaagadh.whatsappgrouplinks.data.models.Group
-import com.riteshmaagadh.whatsappgrouplinks.databinding.FragmentHomeBinding
-import com.riteshmaagadh.whatsappgrouplinks.ui.Utils
-import com.riteshmaagadh.whatsappgrouplinks.ui.error.ErrorActivity
+import com.riteshmaagadh.cms.data.adapters.GroupsAdapter
+import com.riteshmaagadh.cms.data.models.Group
+import com.riteshmaagadh.cms.databinding.ActivityCategoryDetailBinding
+import com.riteshmaagadh.cms.ui.Utils
+import com.riteshmaagadh.cms.ui.error.ErrorActivity
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 
+class CategoryDetailActivity : AppCompatActivity() {
 
-class HomeFragment : Fragment() {
-
-    private lateinit var binding: FragmentHomeBinding
+    private lateinit var binding: ActivityCategoryDetailBinding
     private var isScrolling = false
     private var currentItems = 0
     private var totalItems = 0
@@ -43,43 +31,29 @@ class HomeFragment : Fragment() {
     private lateinit var lastDoc: DocumentSnapshot
     private lateinit var groupsAdapter: GroupsAdapter
     private val groupList: ArrayList<Group> = arrayListOf()
-    private var rewardedAd: RewardedAd? = null
-    private val adRequest = AdRequest.Builder().build()
 
-    override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View {
-        binding = FragmentHomeBinding.inflate(inflater, container, false)
-        initUI()
-        return binding.root
-    }
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        binding = ActivityCategoryDetailBinding.inflate(layoutInflater)
+        setContentView(binding.root)
 
-    private fun initUI() {
-        if (Utils.isOnline(requireContext())){
+        if (Utils.isOnline(this)){
             binding.progressBar.visibility = View.VISIBLE
 
-            val layoutManager = LinearLayoutManager(requireContext())
+            val title = intent.extras?.getString("category_title")!!
+            binding.categoryTitleTv.text = title
+
+            binding.backArrow.setOnClickListener {
+                finish()
+            }
+
+            val layoutManager = LinearLayoutManager(this)
 
             binding.recyclerView.layoutManager = layoutManager
 
-            groupsAdapter = GroupsAdapter(groupList, requireContext(), object : GroupsAdapter.AdapterCallbacks {
+            groupsAdapter = GroupsAdapter(groupList, this, object : GroupsAdapter.AdapterCallbacks {
                 override fun onJoinButtonClicked(groupLink: String) {
-                    if (rewardedAd != null) {
-                        rewardedAd?.show(requireActivity()
-                        ) { reward ->
-                            loadAd()
-                        }
-                        rewardedAd?.fullScreenContentCallback = object :
-                            FullScreenContentCallback() {
-                            override fun onAdDismissedFullScreenContent() {
-                                super.onAdDismissedFullScreenContent()
-                                Utils.openWhatsapp(requireContext(), groupLink)
-                            }
-                        }
-                    } else {
-                        Utils.openWhatsapp(requireContext(), groupLink)
-                    }
+                    Utils.openWhatsapp(this@CategoryDetailActivity, groupLink)
                 }
             })
             binding.recyclerView.adapter = groupsAdapter
@@ -109,44 +83,38 @@ class HomeFragment : Fragment() {
                 collectionRef
                     .orderBy("index", Query.Direction.DESCENDING)
                     .whereEqualTo("active",true)
+                    .whereEqualTo("category",title)
                     .limit(10)
                     .get()
                     .addOnSuccessListener {
-                        lastDoc = it.documents[it.size() - 1]
-                        val groups = it.toObjects(Group::class.java)
-                        groupList.addAll(groups)
-                        groupsAdapter.notifyDataSetChanged()
-                        binding.progressBar.visibility = View.GONE
+                        if (it.documents.isNotEmpty()) {
+                            lastDoc = it.documents[it.size() - 1]
+                            val groups = it.toObjects(Group::class.java)
+                            groupList.addAll(groups)
+                            groupsAdapter.notifyDataSetChanged()
+                            binding.progressBar.visibility = View.GONE
+                        } else {
+                            binding.emptyView.visibility = View.VISIBLE
+                            binding.progressBar.visibility = View.GONE
+                        }
                     }
                     .addOnFailureListener {
                         binding.progressBar.visibility = View.GONE
-                        val intent = Intent(requireContext(), ErrorActivity::class.java)
+                        val intent = Intent(this@CategoryDetailActivity, ErrorActivity::class.java)
                         intent.putExtra("has_network_gone",false)
                         startActivity(intent)
-                        requireActivity().finish()
+                        finish()
                     }
             }
-
-            loadAd()
-
         } else {
-            val intent = Intent(requireContext(), ErrorActivity::class.java)
+            val intent = Intent(this@CategoryDetailActivity, ErrorActivity::class.java)
             intent.putExtra("has_network_gone",true)
             startActivity(intent)
-            requireActivity().finish()
+            finish()
         }
-    }
 
-    private fun loadAd() {
-        RewardedAd.load(requireContext(), getString(R.string.rewarded_ad_unit_id), adRequest, object : RewardedAdLoadCallback() {
-            override fun onAdFailedToLoad(adError: LoadAdError) {
-                rewardedAd = null
-            }
 
-            override fun onAdLoaded(ad: RewardedAd) {
-                rewardedAd = ad
-            }
-        })
+
     }
 
     private fun fetchData() {
@@ -168,10 +136,4 @@ class HomeFragment : Fragment() {
         }
     }
 
-
-    companion object {
-        @JvmStatic
-        fun newInstance() =
-            HomeFragment()
-    }
 }

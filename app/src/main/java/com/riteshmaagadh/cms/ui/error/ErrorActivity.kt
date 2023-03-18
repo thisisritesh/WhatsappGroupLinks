@@ -1,12 +1,12 @@
-package com.riteshmaagadh.whatsappgrouplinks.ui.error
+package com.riteshmaagadh.cms.ui.error
 
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import com.bumptech.glide.Glide
-import com.riteshmaagadh.whatsappgrouplinks.R
-import com.riteshmaagadh.whatsappgrouplinks.databinding.ActivityErrorBinding
-import com.riteshmaagadh.whatsappgrouplinks.ui.MainActivity
+import com.riteshmaagadh.cms.R
+import com.riteshmaagadh.cms.databinding.ActivityErrorBinding
+import com.riteshmaagadh.cms.ui.MainActivity
 
 class ErrorActivity : AppCompatActivity() {
 

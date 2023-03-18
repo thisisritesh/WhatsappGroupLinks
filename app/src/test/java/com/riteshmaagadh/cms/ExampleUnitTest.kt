@@ -1,4 +1,4 @@
-package com.riteshmaagadh.whatsappgrouplinks
+package com.riteshmaagadh.cms
 
 import org.junit.Test
 

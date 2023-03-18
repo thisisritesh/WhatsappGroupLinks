@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    package="com.riteshmaagadh.whatsappgrouplinks">
+    package="com.riteshmaagadh.cms">
 
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
@@ -11,7 +11,7 @@
     </queries>
 
     <application
-        android:allowBackup="true"
+        android:allowBackup="false"
         android:dataExtractionRules="@xml/data_extraction_rules"
         android:fullBackupContent="@xml/backup_rules"
         android:icon="@mipmap/ic_launcher"
@@ -21,14 +21,11 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.WhatsappGroupLinks"
         tools:targetApi="31">
-        <meta-data
-            android:name="com.google.android.gms.ads.APPLICATION_ID"
-            android:value="@string/admob_app_id"/>
         <activity
             android:name=".ui.error.ErrorActivity"
             android:exported="false" />
         <activity
-            android:name="com.riteshmaagadh.whatsappgrouplinks.ui.categorydetail.CategoryDetailActivity"
+            android:name=".ui.categorydetail.CategoryDetailActivity"
             android:exported="false" />
         <activity
             android:name=".ui.MainActivity"

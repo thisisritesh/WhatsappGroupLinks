@@ -7,6 +7,35 @@
   "client": [
     {
       "client_info": {
+        "mobilesdk_app_id": "1:304420986396:android:8218e2cdfa2f82c4c549d9",
+        "android_client_info": {
+          "package_name": "com.riteshmaagadh.cms"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "304420986396-duh6ca7593b8vu687t0f00ouavi5u19u.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBucC8vUE1q8Ev0S2Ebp4RGOjPOn8DMAoc"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "304420986396-duh6ca7593b8vu687t0f00ouavi5u19u.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
         "mobilesdk_app_id": "1:304420986396:android:f667f1a25f2f0c2ec549d9",
         "android_client_info": {
           "package_name": "com.riteshmaagadh.hindubabynames"

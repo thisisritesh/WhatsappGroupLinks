@@ -1,18 +1,14 @@
-package com.riteshmaagadh.whatsappgrouplinks.data.adapters
+package com.riteshmaagadh.cms.data.adapters
 
 import android.content.Context
 import android.content.Intent
-import android.net.Uri
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
-import com.riteshmaagadh.whatsappgrouplinks.data.models.Category
-import com.riteshmaagadh.whatsappgrouplinks.data.models.Group
-import com.riteshmaagadh.whatsappgrouplinks.databinding.CategoryItemBinding
-import com.riteshmaagadh.whatsappgrouplinks.databinding.GroupItemBinding
-import com.riteshmaagadh.whatsappgrouplinks.ui.categorydetail.CategoryDetailActivity
-import kotlin.coroutines.coroutineContext
+import com.riteshmaagadh.cms.data.models.Category
+import com.riteshmaagadh.cms.databinding.CategoryItemBinding
+import com.riteshmaagadh.cms.ui.categorydetail.CategoryDetailActivity
 
 class CategoriesAdapter(private val list: List<Category>, val context: Context) :
     RecyclerView.Adapter<CategoriesAdapter.CategoryViewHolder>() {

@@ -1,4 +1,4 @@
-package com.riteshmaagadh.whatsappgrouplinks.data.models
+package com.riteshmaagadh.cms.data.models
 
 import com.google.firebase.firestore.DocumentId
 
