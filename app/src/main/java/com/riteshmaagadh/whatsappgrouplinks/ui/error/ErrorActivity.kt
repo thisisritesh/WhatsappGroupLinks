@@ -17,6 +17,7 @@ class ErrorActivity : AppCompatActivity() {
         binding = ActivityErrorBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
+
         val hasNetworkGone = intent.extras?.getBoolean("has_network_gone")!!
 
         if (hasNetworkGone){
